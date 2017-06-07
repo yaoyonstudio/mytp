@@ -1,0 +1,164 @@
+{include file="../application/admin/view/public/header.html" /}
+
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>{$name}<small>{$desc}</small></h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+            <form class="form-horizontal form-label-left">
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">新闻标题</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" class="form-control" id="news_title" name="news_title" placeholder="新闻标题">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">新闻关键词</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" class="form-control" id="news_keywords" name="news_keywords" placeholder="新闻关键词">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">新闻来源</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" class="form-control" id="news_keywords" name="news_keywords" placeholder="新闻来源">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
+                </label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <textarea class="form-control" rows="3" placeholder='rows="3"'></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Select</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <select class="form-control">
+                    <option>Choose option</option>
+                    <option>Option one</option>
+                    <option>Option two</option>
+                    <option>Option three</option>
+                    <option>Option four</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-3 col-sm-3 col-xs-12 control-label">Checkboxes and radios
+                  <br>
+                  <small class="text-navy">Normal Bootstrap elements</small>
+                </label>
+
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value=""> Option one. select more than one options
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" value=""> Option two. select more than one options
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios"> Option one. only select one option
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios"> Option two. only select one option
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-md-3 col-sm-3 col-xs-12 control-label">Checkboxes and radios
+                  <br>
+                  <small class="text-navy">Normal Bootstrap elements</small>
+                </label>
+
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" class="flat" checked="checked"> Checked
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" class="flat"> Unchecked
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" class="flat" disabled="disabled"> Disabled
+                    </label>
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" class="flat" disabled="disabled" checked="checked"> Disabled & checked
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" class="flat" checked name="iCheck"> Checked
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" class="flat" name="iCheck"> Unchecked
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" class="flat" name="iCheck" disabled="disabled"> Disabled
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" class="flat" name="iCheck3" disabled="disabled" checked> Disabled & Checked
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                  <button type="reset" class="btn btn-primary">重置</button>
+                  <button type="submit" class="btn btn-success">提交</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!-- /page content -->
+
+{include file="../application/admin/view/public/footer.html" /}
+
+    <!-- bootstrap-wysiwyg -->
+    <script src="/static/admin/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="/static/admin/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="/static/admin/vendors/google-code-prettify/src/prettify.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="/static/admin/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <!-- Switchery -->
+    <script src="/static/admin/vendors/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="/static/admin/vendors/select2/dist/js/select2.full.min.js"></script>
+    <!-- Autosize -->
+    <script src="/static/admin/vendors/autosize/dist/autosize.min.js"></script>
+    <!-- starrr -->
+    <script src="/static/admin/vendors/starrr/dist/starrr.js"></script>
