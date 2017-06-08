@@ -22,4 +22,9 @@ class News extends Controller
         $this->assign("desc", $desc);
         return $this->fetch();
     }
+
+    public function createNews()
+    {
+        dump($_POST);
+    }
 }

@@ -11,8 +11,8 @@
           </div>
           <div class="x_content">
             <br />
-            <div class="form-horizontal form-label-left">
-
+            <form id="addForm" name="addForm" method="post" action="/Admin/News/createNews" enctype="multipart/form-data">
+              <div class="form-horizontal form-label-left">
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">*</span>资讯标题</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
@@ -54,7 +54,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">资讯描述
                 </label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <textarea class="form-control" id="news_description" name="news_description" rows="3" placeholder='rows="3"'></textarea>
+                  <textarea class="form-control" id="news_description" name="news_description" rows="3"></textarea>
                 </div>
               </div>
               <div class="form-group">
@@ -82,16 +82,17 @@
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">特色图片</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  d
+                  <input type="file" id="img" name="img" style="margin-top: 6px;" />
+                  <div class="preview" style="margin-top: 10px;">
+                  </div>
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">资讯内容</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <script id="container" name="content" type="text/plain">这里写你的初始化内容</script>
+                  <script id="container" name="content" type="text/plain"></script>
                 </div>
               </div>
-
 
               <div class="ln_solid"></div>
               <div class="form-group">
@@ -101,6 +102,7 @@
                 </div>
               </div>
 
+            </div>
             </form>
           </div>
         </div>
@@ -131,5 +133,7 @@
     <script src="/static/lib/ueditor/ueditor.config.js"></script>
     <script src="/static/lib/ueditor/ueditor.all.min.js"></script>
     <script>
-        var ue = UE.getEditor('container');
+        var ue = UE.getEditor('container', {
+          initialFrameHeight: 420
+        });
     </script>
