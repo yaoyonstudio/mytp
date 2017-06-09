@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-06-07 18:56:46
+Date: 2017-06-09 18:22:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -103,7 +103,7 @@ CREATE TABLE `news` (
   PRIMARY KEY (`news_id`),
   KEY `editor_id` (`user_id`),
   KEY `cat_id` (`cat_id`),
-  CONSTRAINT `news_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `news_category` (`cat_id`),
+  CONSTRAINT `news_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `news_cate` (`cat_id`),
   CONSTRAINT `news_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `admin` (`admin_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
@@ -112,21 +112,36 @@ CREATE TABLE `news` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `news_category`
+-- Table structure for `news_cate`
 -- ----------------------------
-DROP TABLE IF EXISTS `news_category`;
-CREATE TABLE `news_category` (
+DROP TABLE IF EXISTS `news_cate`;
+CREATE TABLE `news_cate` (
   `cat_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '新闻类别ID',
   `cat_name` varchar(20) NOT NULL,
   `parent_id` smallint(6) unsigned zerofill NOT NULL COMMENT '父级ID',
   `create_time` int(11) unsigned zerofill DEFAULT NULL,
   `update_time` int(11) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`cat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of news_category
+-- Records of news_cate
 -- ----------------------------
+INSERT INTO `news_cate` VALUES ('29', '财经', '000000', '01496986765', '01496986765');
+INSERT INTO `news_cate` VALUES ('30', '社会', '000000', '01496986802', '01496986802');
+INSERT INTO `news_cate` VALUES ('31', '军事', '000000', '01496989253', '01496989253');
+INSERT INTO `news_cate` VALUES ('32', '体育', '000000', '01496989283', '01496989283');
+INSERT INTO `news_cate` VALUES ('33', '娱乐', '000000', '01496989290', '01496989290');
+INSERT INTO `news_cate` VALUES ('34', '证券', '000000', '01496989303', '01496989303');
+INSERT INTO `news_cate` VALUES ('35', '视频', '000000', '01496989310', '01496989310');
+INSERT INTO `news_cate` VALUES ('36', '汽车', '000000', '01496989322', '01496989322');
+INSERT INTO `news_cate` VALUES ('37', '房产', '000000', '01496989331', '01496989331');
+INSERT INTO `news_cate` VALUES ('38', '教育', '000000', '01496989338', '01496989338');
+INSERT INTO `news_cate` VALUES ('39', '文化', '000000', '01496989345', '01496989345');
+INSERT INTO `news_cate` VALUES ('40', '公益', '000000', '01496989357', '01496989357');
+INSERT INTO `news_cate` VALUES ('41', '科技', '000000', '01496989363', '01496989363');
+INSERT INTO `news_cate` VALUES ('42', '游戏', '000000', '01496989370', '01496989370');
+INSERT INTO `news_cate` VALUES ('43', '社会222', '000040', '01497000568', '01497000568');
 
 -- ----------------------------
 -- Table structure for `news_comment`

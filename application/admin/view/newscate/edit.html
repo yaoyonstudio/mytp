@@ -1,0 +1,76 @@
+{include file="../application/admin/view/public/header.html" /}
+
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>{$name}<small>{$desc}</small></h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <br />
+            <form id="addForm" name="addForm" method="post" action="/Admin/NewsCate/update" enctype="multipart/form-data">
+              <div class="form-horizontal form-label-left">
+
+              <input type="hidden" class="form-control" id="cat_id" name="cat_id" value="{$cateData.cat_id}">
+
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">*</span>资讯分类标题</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <input type="text" class="form-control" id="cat_name" name="cat_name" placeholder="资讯分类标题" value="{$cateData.cat_name}">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">*</span>资讯分类父级</label>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                  <select id="parent_id" name="parent_id" class="form-control">
+                    <option value="0">请选择父级分类</option>
+                    {volist name="$all_cate" id="cate"}
+                    <option value="{$cate.cat_id}"
+                      <?php if($cate['cat_id']==$cateData['parent_id']) echo("selected");?>
+                      >{$cate.cat_name}</option>
+                    {/volist}
+                  </select>
+                </div>
+              </div>
+
+              <div class="ln_solid"></div>
+              <div class="form-group">
+                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                  <button type="reset" class="btn btn-primary">重置</button>
+                  <button type="submit" class="btn btn-success">提交</button>
+                </div>
+              </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!-- /page content -->
+
+{include file="../application/admin/view/public/footer.html" /}
+
+    <!-- bootstrap-wysiwyg -->
+    <script src="/static/admin/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="/static/admin/vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="/static/admin/vendors/google-code-prettify/src/prettify.js"></script>
+    <!-- jQuery Tags Input -->
+    <script src="/static/admin/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    <!-- Switchery -->
+    <script src="/static/admin/vendors/switchery/dist/switchery.min.js"></script>
+    <!-- Select2 -->
+    <script src="/static/admin/vendors/select2/dist/js/select2.full.min.js"></script>
+
+    <!-- Autosize -->
+    <script src="/static/admin/vendors/autosize/dist/autosize.min.js"></script>
+    <!-- jQuery autocomplete -->
+    <script src="/static/admin/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+    <!-- starrr -->
+    <script src="/static/admin/vendors/starrr/dist/starrr.js"></script>
+
+    <script src="/static/lib/ueditor/ueditor.config.js"></script>
+    <script src="/static/lib/ueditor/ueditor.all.min.js"></script>
+

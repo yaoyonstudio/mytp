@@ -1,0 +1,56 @@
+{include file="../application/admin/view/public/header.html" /}
+
+<link rel="stylesheet" href="/static/admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css">
+
+  <!-- page content -->
+  <div class="right_col" role="main">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>{$name}<small>{$desc}</small></h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table id="datatable" class="table table-striped table-bordered" style="width: 100%;">
+              <thead>
+              <tr>
+                <th>序号</th>
+                <th>类别名称</th>
+                <th>上级类别</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!-- /page content -->
+
+{include file="../application/admin/view/public/footer.html" /}
+
+<script src="/static/admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/static/admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script>
+  var table = $('#datatable').DataTable({
+    processing: true,
+    serverSide: true,
+    searchDelay: 400,
+    ajax: {
+      url: "/Admin/NewsCate/getNewsCateList",
+      type: 'GET'
+    },
+    columns: [
+      {"data": "cat_id", "searchable": false},
+      {"data": "cat_name"},
+      {"data": "parent_id", "searchable": false},
+      {"data": "cat_id", "render": function(data, type, row, meta){
+          return '<a href="/admin/NewsCate/edit/?id='+data+'">编辑</a>　<span id="delBtn" data-id="' + data + '">删除</span>';
+        }
+      }
+    ]
+  });
+  var info = table.page.info();
+  console.log(info)
+</script>

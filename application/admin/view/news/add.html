@@ -11,7 +11,7 @@
           </div>
           <div class="x_content">
             <br />
-            <form id="addForm" name="addForm" method="post" action="/Admin/News/createNews" enctype="multipart/form-data">
+            <form id="addForm" name="addForm" method="post" action="/Admin/News/create" enctype="multipart/form-data">
               <div class="form-horizontal form-label-left">
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">*</span>资讯标题</label>
@@ -22,7 +22,7 @@
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">*</span>资讯分类</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <select class="form-control">
+                  <select id="news_cate" name="news_cate" class="form-control">
                     <option>Choose option</option>
                     <option>Option one</option>
                     <option>Option two</option>

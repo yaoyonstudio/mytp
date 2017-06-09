@@ -23,7 +23,7 @@ class News extends Controller
         return $this->fetch();
     }
 
-    public function createNews()
+    public function create()
     {
         dump($_POST);
     }
