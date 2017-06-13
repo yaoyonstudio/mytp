@@ -11,7 +11,7 @@
           </div>
           <div class="x_content">
             <br />
-            <form id="addForm" name="addForm" method="post" action="/Admin/NewsCate/update" enctype="multipart/form-data">
+            <form id="editForm" name="editForm" method="post">
               <div class="form-horizontal form-label-left">
 
               <input type="hidden" class="form-control" id="cat_id" name="cat_id" value="{$cateData.cat_id}">
@@ -51,6 +51,26 @@
   </div>
   <!-- /page content -->
 
+    <!-- 提示弹框 -->
+    <div class="modal fade bs-example-modal-sm alertModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="alertModalLabel">提示</h4>
+          </div>
+          <div class="modal-body">
+            <h4>内容</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="okBtn" class="btn btn-primary">确定(<span></span>)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /提示弹框 -->
+
 {include file="../application/admin/view/public/footer.html" /}
 
     <!-- bootstrap-wysiwyg -->
@@ -74,3 +94,43 @@
     <script src="/static/lib/ueditor/ueditor.config.js"></script>
     <script src="/static/lib/ueditor/ueditor.all.min.js"></script>
 
+    <script>
+      $("#editForm").submit(function (event) {
+          event.preventDefault()
+          $.ajax({
+              url: '/admin/NewsCate/update',
+              type: 'POST',
+              data: $("#editForm").serialize(),
+              dataType: 'json',
+              success: function (data) {
+                  if (data.status) {
+                      $('.alertModal .modal-body h4').text('资讯分类更新成功')
+                      $('.alertModal').modal()
+                      console.log(data)
+
+                      var time = 5
+                      $("#okBtn span").text(time)
+                      var interval = setInterval(function () {
+                          time--
+                          $("#okBtn span").text(time)
+                      }, 1000)
+                      setTimeout(function () {
+                          location.href = '/admin/NewsCate/index'
+                          clearInterval(interval)
+                      }, 5000)
+
+                  } else {
+                      console.log('ddd')
+                  }
+              },
+              error: function (error) {
+                  console.log(error)
+              }
+          })
+      })
+
+      // 跳转页面
+      $(document).on('click', '#okBtn', function () {
+          location.href = '/admin/NewsCate/index'
+      })
+    </script>

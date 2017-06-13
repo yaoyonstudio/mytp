@@ -1,5 +1,20 @@
 {include file="../application/admin/view/public/header.html" /}
 
+<style>
+  .delIcon {
+    position: absolute;
+    display: block;
+    cursor: pointer;
+    top: -9px;
+    right: -9px;
+    width: 18px;
+    height: 18px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QTY3RkVEMDMyQjkyMTFFNkJBMEJBMjA3REQwMzM4MTMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QTY3RkVEMDQyQjkyMTFFNkJBMEJBMjA3REQwMzM4MTMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBNjdGRUQwMTJCOTIxMUU2QkEwQkEyMDdERDAzMzgxMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBNjdGRUQwMjJCOTIxMUU2QkEwQkEyMDdERDAzMzgxMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlPFzqgAAAH2SURBVHjanJXdSgJBFMfX1ZKCIvpYP7IuutEy8AFCUSiwpyjqAeoBeooeoOwVCvSiGxGK6EqEaCUwL8SP3YooCxJ0O/84xjaOVh74wex/Z//MzDlz1qHIw0mEmAVigmgTL0SN0Jm2+KFDYrZMbBDTyuB4Is6JW3El3VCJdWKTGFN+D8xZJUaIMmGJhjBbU/4fi4SLKNkNV3hlwwZMDcJU2TQpzlBVVfF4PKOiDg3vJAEPJ96EiUnRLJ1OJ/P5/G4wGBzv6hhDy2QySYkpPMIuLo0f4ff73ZFIZMnr9c5ls9mteDx+Ah1j0jRUB+ZUKpUP4dMQymafmBJNsRoy2IapYRgP0DRNm63X62YikTjRdf1Nsu1nGB5wlhSZaS6X2yGjGTybpvkQi8VSfcwQbVVW7UJY3wPLAtagyTBs9lsdzgzbxMpo248Y4xjsiRLiFYYNUQ0EAu5uAnBm0Wj0mLZ6hDEnahtzJIZVlS/5T7Va/SgUCvcwoAynisXiO8AYGr0rYY7EUHdwYe/JahFFXKvVWnbd5/ONNhqNVqfTEc3QiQ6dfOgvXOCKPQHNZrMnYdD65OUUx9e9yyZ3jcUh7/IFcSV2mzK3pPl/ml1zX+xpXxDuuGv4/tAT0WDPiEt7rToG/ALCfM/9/Av4qjMUAVfGjexSfAowAAv/xKb6nWIFAAAAAElFTkSuQmCC);
+  }
+</style>
+
   <!-- page content -->
   <div class="right_col" role="main">
     <div class="row">
@@ -11,12 +26,14 @@
           </div>
           <div class="x_content">
             <br />
-            <form id="addForm" name="addForm" method="post" enctype="multipart/form-data">
+            <form id="updateForm" name="updateForm" method="post" enctype="multipart/form-data">
               <div class="form-horizontal form-label-left">
+              <input type="hidden" class="form-control" id="news_id" name="news_id" value="{$newsData.news_id}">
+
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">*</span>资讯标题</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" id="news_title" name="news_title" placeholder="资讯标题">
+                  <input type="text" class="form-control" id="news_title" name="news_title" placeholder="资讯标题" value="{$newsData.news_title}">
                 </div>
               </div>
               <div class="form-group">
@@ -24,7 +41,9 @@
                 <div class="col-md-9 col-sm-9 col-xs-12">
                   <select id="cat_id" name="cat_id" class="form-control">
                     {volist name="$all_cate" id="cate"}
-                    <option value="{$cate.cat_id}">{$cate.cat_name}</option>
+                    <option value="{$cate.cat_id}"
+                    <?php if($cate['cat_id']==$newsData['cat_id']) echo("selected");?>
+                    >{$cate.cat_name}</option>
                     {/volist}
                   </select>
                 </div>
@@ -32,19 +51,19 @@
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">资讯来源</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" id="news_source" name="news_source" placeholder="资讯来源">
+                  <input type="text" class="form-control" id="news_source" name="news_source" placeholder="资讯来源" value="{$newsData.news_source}">
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">资讯来源链接</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" id="news_source_link" name="news_source_link" placeholder="资讯来源链接">
+                  <input type="text" class="form-control" id="news_source_link" name="news_source_link" placeholder="资讯来源链接" value="{$newsData.news_source_link}">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">资讯关键词</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <input id="tags_1" name="news_keywords" type="text" class="tags form-control" value="" />
+                  <input id="tags_1" name="news_keywords" type="text" class="tags form-control" value="{$newsData.news_keywords}" />
                   <div id="" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
                 </div>
               </div>
@@ -52,7 +71,7 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">资讯描述
                 </label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <textarea class="form-control" id="news_description" name="news_description" rows="3"></textarea>
+                  <textarea class="form-control" id="news_description" name="news_description" rows="3">{$newsData.news_description}</textarea>
                 </div>
               </div>
               <div class="form-group">
@@ -61,7 +80,9 @@
                 <div class="col-md-9 col-sm-9 col-xs-12">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" id="news_isopen" name="news_isopen" class="flat" value="1" checked="checked"> 启用
+                      <input type="checkbox" id="news_isopen" name="news_isopen" class="flat" value="1"
+                        <?php if($newsData['news_isopen'] == 1) echo("checked"); ?>
+                      /> 启用
                     </label>
                   </div>
                 </div>
@@ -72,7 +93,7 @@
                 <div class="col-md-9 col-sm-9 col-xs-12">
                   <div class="checkbox">
                     <label>
-                      <input type="checkbox" id="news_isrecommend" name="news_isrecommend" class="flat" value="1"> 推荐
+                      <input type="checkbox" id="news_isrecommend" name="news_isrecommend" class="flat" value="1" <?php if($newsData['news_isrecommend'] == 1) echo("checked"); ?>> 推荐
                     </label>
                   </div>
                 </div>
@@ -82,14 +103,20 @@
                 <div class="col-md-9 col-sm-9 col-xs-12">
                   <input type="file" id="img" name="img" style="margin-top: 6px;" />
                   <input type="hidden" id="news_img" name="news_img" />
+                  <input type="hidden" id="img_id" name="img_id" value="{$newsData.img.img_id}" />
                   <div id="imgPreviewBox" style="margin-top: 10px;">
+                    <?php
+                    if ($newsData['img']) {
+                      echo '<div style="position: relative; width: 120px;"><img style="width: 120px;" src="/'.$newsData['img']['img_originUrl'].'" /><i class="delIcon"></i></div>';
+                        }
+                    ?>
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">资讯内容</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <script id="container" name="news_content" type="text/plain"></script>
+                  <script id="container" name="news_content" type="text/plain">{$newsData.news_content}</script>
                 </div>
               </div>
 
@@ -180,8 +207,23 @@
         });
     </script>
     <script>
+//        if ( !{$newsData['img']} ) {
+//          console.log('d')
+//          var imgData = {$newsData.img};
+//          if (imgData) {
+//            $("#imgPreviewBox").html('<div style="position: relative; width: 120px;"><img style="width: 120px;" src="/'+imgData.img_originUrl+'" /><i class="delIcon"></i></div>')
+//          }
+//        }
+
+        $(document).on('click', '#imgPreviewBox div i', function () {
+          $('#img_id').val(null)
+          $("#imgPreviewBox").html('')
+        })
+
         //上传图片预览
         $("#img").change(function () {
+            $('#img_id').val(null)
+
             var img = this.files[0]
             $("#imgPreviewBox").html("");
             function readAndPreview(file) {
@@ -204,17 +246,16 @@
         });
 
         // 表单提交
-        $("#addForm").submit(function (event) {
+        $("#updateForm").submit(function (event) {
             event.preventDefault()
             $.ajax({
-                url: '/admin/News/create',
+                url: '/admin/News/update',
                 type: 'POST',
-                data: $("#addForm").serialize(),
+                data: $("#updateForm").serialize(),
                 dataType: 'json',
                 success: function (data) {
-                  console.log('dd')
                     if (data.status) {
-                        timerTip('.selectModal', '资讯添加成功', '/admin/News/index', 5)
+                        timerTip('.alertModal', '资讯修改成功', '/admin/News/index', 5)
                     } else {
                         timerTip('.alertModal', data.msg, null, 5)
                     }
@@ -226,6 +267,9 @@
         })
 
         // 跳转页面
+        $(document).on('click', '#okBtn', function () {
+          location.href = '/admin/News/index'
+        })
         $(document).on('click', '#backBtn', function () {
             location.href = '/admin/News/index'
         })

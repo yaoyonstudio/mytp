@@ -2,7 +2,9 @@
 namespace app\admin\controller;
 use app\admin\model\NewsCate as NewsCateModel;
 
+use think\Db;
 use think\Controller;
+use think\Loader;
 
 class NewsCate extends Controller
 {
@@ -61,21 +63,31 @@ class NewsCate extends Controller
 
     public function create()
     {
-        $cate = new NewsCateModel;
-        $cate->cat_name = input('cat_name');
-        $cate->parent_id = input('parent_id');
+        $data = [
+          'cat_name' => input('cat_name'),
+          'parent_id' => intval(input('parent_id')),
+          'create_time' => time(),
+          'update_time' => time()
+        ];
 
-        $cate->save();
-        if ($cate->cat_id) {
-            echo '<script>alert("类别插入成功！");location.href="/admin/NewsCate/index"</script>';
+        $validate = Loader::validate('app\admin\validate\NewscateValid');
+
+        if($validate->check($data)){
+          Db::name('news_cate')->insert($data);
+          $cat_id = Db::name('news_cate')->getLastInsID();
+          if ($cat_id) {
+            return trueReturn($cat_id);
+          } else {
+            return falseReturn(null);
+          }
         } else {
-            echo '<script>alert("类别添加失败！");</script>';
+            return falseReturn(null, $validate->getError());
         }
     }
 
     public function edit()
     {
-        $name = "添加资讯分类";
+        $name = "修改资讯分类";
         $desc = "";
         $all_cate = NewsCateModel::all();
 
@@ -92,14 +104,26 @@ class NewsCate extends Controller
 
     public function update()
     {
-        $cat_id = input('cat_id');
-        $cat_name = input('cat_name');
-        $parent_id = input('parent_id');
+        $data = $_POST;
+        $cat_id = $data['cat_id'];
+        $cat_name = $data['cat_name'];
+        $parent_id = $data['parent_id'];
         $result = NewsCateModel::where('cat_id', $cat_id)->update(['cat_name' => $cat_name, 'parent_id' => $parent_id]);
         if ($result) {
-            echo '<script>alert("类别更新成功！");location.href="/admin/NewsCate/index"</script>';
+            return trueReturn($result);
         } else {
-            echo '<script>alert("类别更新失败！");location.href="/admin/NewsCate/index"</script>';
+            return falseReturn(null);
+        }
+    }
+
+    public function delete()
+    {
+        $cat_id = input('post.id');
+        $result = NewsCateModel::destroy($cat_id);
+        if ($result) {
+            return trueReturn($result);
+        } else {
+            return falseReturn(null);
         }
     }
 }

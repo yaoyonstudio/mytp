@@ -1,19 +1,17 @@
 <?php
-namespace app\api\model;
+namespace app\admin\model;
 
 use think\Model;
 
 class News extends Model{
     protected $autoWriteTimestamp = true;
     protected $insert             = [
-        'news_type' => 1,
         'news_isopen' => 1
     ];
 
     protected $field = [
         'news_id'          => 'int',
         'cat_id'      => 'int',
-        'news_type'      => 'int',
         'news_isopen'      => 'int',
         'img_id'      => 'int',
         'editor_id'      => 'int',
@@ -28,7 +26,7 @@ class News extends Model{
     ];
 
     public function cate(){
-        return $this->hasOne('NewsCategories',"cat_id","cat_id")->field('cat_id,cat_name');
+        return $this->hasOne('NewsCate',"cat_id","cat_id")->field('cat_id,cat_name');
     }
 
     public function editor(){
@@ -36,7 +34,7 @@ class News extends Model{
     }
 
     public function img(){
-        return $this->hasOne('NewsImages',"img_id","img_id")->field('img_id,img_title,img_thumbUrl,img_commonUrl,img_originUrl');
+        return $this->hasOne('NewsImage',"img_id","img_id")->field('img_id,img_title,img_thumbUrl,img_commonUrl,img_originUrl');
     }
 
     public function comment(){

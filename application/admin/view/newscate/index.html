@@ -2,6 +2,10 @@
 
 <link rel="stylesheet" href="/static/admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
+<style>
+  div.dataTables_wrapper div.dataTables_processing {padding: .5em 0;}
+</style>
+
   <!-- page content -->
   <div class="right_col" role="main">
     <div class="row">
@@ -28,12 +32,73 @@
   </div>
   <!-- /page content -->
 
+    <!-- 确认弹框 -->
+    <div class="modal fade bs-example-modal-sm confirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="confirmModalLabel">提示</h4>
+          </div>
+          <div class="modal-body">
+            <h4>内容</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" id="delConfirmBtn" class="btn btn-primary">删除</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /确认弹框 -->
+
+    <!-- 提示弹框 -->
+    <div class="modal fade bs-example-modal-sm alertModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="alertModalLabel">提示</h4>
+          </div>
+          <div class="modal-body">
+            <h4>内容</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="okBtn" class="btn btn-primary">确定(<span></span>)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /提示弹框 -->
+
 {include file="../application/admin/view/public/footer.html" /}
 
 <script src="/static/admin/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="/static/admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
   var table = $('#datatable').DataTable({
+    language: {
+      'emptyTable': '没有数据',
+      'loadingRecords': '加载中...',
+      'processing': '查询加载中...',
+      'search': '搜索:',
+      'lengthMenu': '每页 _MENU_ 条记录',
+      'zeroRecords': '没有数据',
+      'paginate': {
+          'next':       '下一页',
+          'previous':   '上一页'
+      },
+      'info': '第 _PAGE_ 页 / 共 _PAGES_ 页',
+      'infoEmpty': '没有数据',
+      'infoFiltered': '(从 _MAX_ 条记录中筛选)'
+    },
+    columnDefs:[{
+        orderable: false,//禁用排序
+        targets:[3]   //指定的列
+    }],
+
     processing: true,
     serverSide: true,
     searchDelay: 400,
@@ -53,4 +118,54 @@
   });
   var info = table.page.info();
   console.log(info)
+
+  // 弹出删除确认框
+  $(document).on('click', '#delBtn', function () {
+      var id = $(this).data('id')
+      $('#delConfirmBtn').data('id', id)
+      $('.confirmModal .modal-body h4').text('删除后无法还原，您是否确认删除此资讯分类？')
+      $('.confirmModal').modal()
+  })
+
+  // 执行删除操作
+  $(document).on('click', '#delConfirmBtn', function () {
+      var id = $(this).data('id')
+      $.ajax({
+          url: '/admin/NewsCate/delete',
+          data: {id: id},
+          type: 'POST',
+          dataType: 'json',
+          success: function (data) {
+              if (data.status) {
+                  $('.confirmModal').modal('hide')
+                  $('.alertModal .modal-body h4').text('资讯分类删除成功')
+                  $('.alertModal').modal()
+                  console.log(data)
+
+                  var time = 5
+                  $("#okBtn span").text(time)
+                  var interval = setInterval(function () {
+                      time--
+                      $("#okBtn span").text(time)
+                  }, 1000)
+                  setTimeout(function () {
+                      location.reload()
+                      clearInterval(interval)
+                  }, 5000)
+
+              } else {
+                  console.log('ddd')
+              }
+          },
+          error: function (error) {
+              console.log(error)
+          }
+      })
+  })
+
+  // 刷新页面
+  $(document).on('click', '#okBtn', function () {
+      location.reload()
+  })
+
 </script>

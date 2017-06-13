@@ -1,4 +1,4 @@
-{include file="../application/admin/view/public/header.html" /}
+<script src="../../../../public/static/admin/js/common.js"></script>{include file="../application/admin/view/public/header.html" /}
 
   <!-- page content -->
   <div class="right_col" role="main">
@@ -11,7 +11,8 @@
           </div>
           <div class="x_content">
             <br />
-            <form id="addForm" name="addForm" method="post" action="/Admin/NewsCate/create" enctype="multipart/form-data">
+
+            <form id="addForm" name="addForm" method="post">
               <div class="form-horizontal form-label-left">
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12"><span class="required">*</span>资讯分类标题</label>
@@ -47,6 +48,48 @@
   </div>
   <!-- /page content -->
 
+  <!-- 选择弹框 -->
+  <div class="modal fade bs-example-modal-sm selectModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="selectModalLabel">提示</h4>
+        </div>
+        <div class="modal-body">
+          <h4>内容</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="reloadBtn" class="btn btn-default" data-dismiss="modal">继续添加</button>
+          <button type="button" id="backBtn" class="btn btn-primary">返回列表<span></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /选择弹框 -->
+
+  <!-- 提示弹框 -->
+  <div class="modal fade bs-example-modal-sm alertModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="alertModalLabel">提示</h4>
+        </div>
+        <div class="modal-body">
+          <h4>内容</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="okBtn" class="btn btn-primary" data-dismiss="modal">确定(<span></span>)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /提示弹框 -->
+
+
 {include file="../application/admin/view/public/footer.html" /}
 
     <!-- bootstrap-wysiwyg -->
@@ -69,4 +112,72 @@
 
     <script src="/static/lib/ueditor/ueditor.config.js"></script>
     <script src="/static/lib/ueditor/ueditor.all.min.js"></script>
+
+    <script>
+        $("#addForm").submit(function (event) {
+            event.preventDefault()
+            $.ajax({
+                url: '/admin/NewsCate/create',
+                type: 'POST',
+                data: {
+                    cat_name: $("#cat_name").val(),
+                    parent_id: $("#parent_id").val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status) {
+//                        $('.selectModal .modal-body h4').text('资讯分类添加成功')
+//                        $('.selectModal').modal()
+//                        var time = 5
+//                        $("#backBtn span").text(time)
+//                        var interval = setInterval(function () {
+//                            time--
+//                            $("#backBtn span").text(time)
+//                        }, 1000)
+//                        setTimeout(function () {
+//                            location.href = '/admin/NewsCate/index'
+//                            clearInterval(interval)
+//                        }, 5000)
+                        timerTip('.selectModal', '资讯分类添加成功', '/admin/NewsCate/index', 5)
+                    } else {
+                        timerTip('.alertModal', data.msg, null, 5)
+                    }
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+        })
+
+        // 计时器跳转
+        function timerTip (modalEl, msg, url, time) {
+            $(modalEl + ' .modal-body h4').text(msg)
+            $(modalEl).modal()
+            var t = time | 5
+            var timeout = time * 1000
+            $(modalEl + ' .modal-footer button span').text(t)
+            var timeTipInterval = setInterval(function () {
+                t--
+                $(modalEl + ' .modal-footer button span').text(t)
+            }, 1000)
+            setTimeout(function () {
+                if (url) {
+                    location.href = url
+                } else {
+                    $(modalEl).modal('hide')
+                }
+                clearInterval(timeTipInterval)
+            }, timeout)
+        }
+
+
+        // 跳转页面
+        $(document).on('click', '#backBtn', function () {
+            location.href = '/admin/NewsCate/index'
+        })
+        $(document).on('click', '#reloadBtn', function () {
+            location.reload()
+        })
+
+    </script>
 

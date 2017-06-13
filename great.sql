@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-06-09 18:22:18
+Date: 2017-06-13 21:37:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,6 +40,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
+INSERT INTO `admin` VALUES ('1', 'admin', 'admin@qq.com', '123456', 'jdslfsdfsdfsdfw8sdfsd87fsd85f8sd', '1', null, null, null, null, null, '13925542760', 'http://www.test.com/img/1.jpg', 'kenny');
 
 -- ----------------------------
 -- Table structure for `admin_role`
@@ -88,9 +89,8 @@ CREATE TABLE `news` (
   `news_description` varchar(250) DEFAULT NULL COMMENT '新闻资讯描述',
   `news_keywords` varchar(250) DEFAULT NULL COMMENT '新闻资讯关键词',
   `news_content` longtext NOT NULL COMMENT '新闻资讯内容',
-  `news_type` tinyint(1) unsigned NOT NULL,
   `news_isopen` tinyint(1) unsigned NOT NULL COMMENT '是否开启',
-  `img_id` varchar(10) DEFAULT NULL COMMENT '缩略图',
+  `img_id` int(20) DEFAULT NULL COMMENT '缩略图',
   `news_source` varchar(50) DEFAULT NULL COMMENT '来源',
   `news_source_link` varchar(255) DEFAULT NULL COMMENT '来源网址',
   `news_file_url` varchar(255) DEFAULT NULL COMMENT '附件地址',
@@ -99,17 +99,26 @@ CREATE TABLE `news` (
   `update_time` int(11) DEFAULT NULL,
   `news_good_count` int(11) unsigned zerofill DEFAULT NULL COMMENT '好评数',
   `news_bad_count` int(11) unsigned zerofill DEFAULT NULL COMMENT '差评数',
-  `news_isrecommend` tinyint(1) unsigned zerofill NOT NULL,
+  `news_isrecommend` tinyint(1) unsigned zerofill NOT NULL DEFAULT '0',
   PRIMARY KEY (`news_id`),
-  KEY `editor_id` (`user_id`),
-  KEY `cat_id` (`cat_id`),
-  CONSTRAINT `news_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `news_cate` (`cat_id`),
-  CONSTRAINT `news_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `admin` (`admin_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+  KEY `cat_id` (`cat_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of news
 -- ----------------------------
+INSERT INTO `news` VALUES ('46', '37', '1', '测试文章d', '这是一条测试文章d', '体育,NBA,a,c', '<p>这是一条测试文章这是一条测试文章这是一条测试文章这是一条测试文章这是一条测试文章dd</p>', '0', '70', '腾讯网d', 'http://www.qqd.com', null, null, '1497360885', '1497360885', null, null, '0');
+INSERT INTO `news` VALUES ('47', '32', '1', '测试文章1', '这是一条测试文章', '体育,NBA', '<p>这是一条测试文章这是一条测试文章这是一条测试文章这是一条测试文章这是一条测试文章</p>', '1', null, '腾讯网', 'http://www.qq.com', null, null, '1497254041', '1497254041', null, null, '0');
+INSERT INTO `news` VALUES ('48', '29', '1', '财经新闻测试', '测试财经新闻描述', '财经新闻,服务', '<p>测试财经新闻内容</p><p>测试财经新闻内容</p><p><img src=\"/ueditor/php/upload/image/20170613/1497331650443313.jpg\" title=\"1497331650443313.jpg\" alt=\"img.jpg\" width=\"1\" height=\"1\"/><img src=\"/ueditor/php/upload/image/20170613/1497331672110075.jpg\" title=\"1497331672110075.jpg\" alt=\"img.jpg\" width=\"753\" height=\"548\"/></p><p>测试财经新闻内容</p>', '1', null, '中金在线', 'http://www.test.com', null, null, '1497331928', '1497331928', null, null, '0');
+INSERT INTO `news` VALUES ('49', '29', '1', '财经新闻测试', '测试财经新闻描述', '财经新闻,服务', '<p>测试财经新闻内容</p><p>测试财经新闻内容</p><p><img src=\"/ueditor/php/upload/image/20170613/1497331650443313.jpg\" title=\"1497331650443313.jpg\" alt=\"img.jpg\" width=\"1\" height=\"1\"/><img src=\"/ueditor/php/upload/image/20170613/1497331672110075.jpg\" title=\"1497331672110075.jpg\" alt=\"img.jpg\" width=\"753\" height=\"548\"/></p><p>测试财经新闻内容</p>', '1', null, '中金在线', 'http://www.test.com', null, null, '1497332760', '1497332760', null, null, '1');
+INSERT INTO `news` VALUES ('50', '29', '1', '财经新闻测试', '测试财经新闻描述', '财经新闻,服务', '<p>测试财经新闻内容</p><p>测试财经新闻内容</p><p><img src=\"/ueditor/php/upload/image/20170613/1497331650443313.jpg\" title=\"1497331650443313.jpg\" alt=\"img.jpg\" width=\"1\" height=\"1\"/><img src=\"/ueditor/php/upload/image/20170613/1497331672110075.jpg\" title=\"1497331672110075.jpg\" alt=\"img.jpg\" width=\"753\" height=\"548\"/></p><p>测试财经新闻内容</p>', '1', null, '中金在线', 'http://www.test.com', null, null, '1497333093', '1497333093', null, null, '0');
+INSERT INTO `news` VALUES ('51', '29', '1', '财经新闻测试', '测试财经新闻描述', '财经新闻,服务', '<p>测试财经新闻内容</p><p>测试财经新闻内容</p><p><img src=\"/ueditor/php/upload/image/20170613/1497331650443313.jpg\" title=\"1497331650443313.jpg\" alt=\"img.jpg\" width=\"1\" height=\"1\"/><img src=\"/ueditor/php/upload/image/20170613/1497331672110075.jpg\" title=\"1497331672110075.jpg\" alt=\"img.jpg\" width=\"753\" height=\"548\"/></p><p>测试财经新闻内容</p>', '1', null, '中金在线', 'http://www.test.com', null, null, '1497333103', '1497333103', null, null, '1');
+INSERT INTO `news` VALUES ('52', '29', '1', '财经新闻测试', '测试财经新闻描述', '财经新闻,服务', '<p>测试财经新闻内容</p><p>测试财经新闻内容</p><p><img src=\"/ueditor/php/upload/image/20170613/1497331650443313.jpg\" title=\"1497331650443313.jpg\" alt=\"img.jpg\" width=\"1\" height=\"1\"/><img src=\"/ueditor/php/upload/image/20170613/1497331672110075.jpg\" title=\"1497331672110075.jpg\" alt=\"img.jpg\" width=\"753\" height=\"548\"/></p><p>测试财经新闻内容</p>', '1', null, '中金在线', 'http://www.test.com', null, null, '1497333116', '1497333116', null, null, '0');
+INSERT INTO `news` VALUES ('56', '34', '1', '测试资讯', '测试资讯描述', '关键词1,关键词2', '<p>测试资讯内容1111</p><p><img src=\"/ueditor/php/upload/image/20170613/1497333769113345.jpg\" title=\"1497333769113345.jpg\" alt=\"domo-wallpaper-1920x1080-wallpaper-1.jpg\" width=\"343\" height=\"219\"/></p><p style=\"white-space: normal;\">测试资讯内容2222</p><p><br/></p>', '1', null, '来源', 'http://localhost/img/test.jpg', null, null, '1497333813', '1497333813', null, null, '0');
+INSERT INTO `news` VALUES ('57', '34', '1', '测试资讯', '测试资讯描述', '关键词1,关键词2', '<p>测试资讯内容1111</p><p><img src=\"/ueditor/php/upload/image/20170613/1497333769113345.jpg\" title=\"1497333769113345.jpg\" alt=\"domo-wallpaper-1920x1080-wallpaper-1.jpg\" width=\"343\" height=\"219\"/></p><p style=\"white-space: normal;\">测试资讯内容2222</p><p><br/></p>', '1', null, '来源', 'http://localhost/img/test.jpg', null, null, '1497333842', '1497333842', null, null, '0');
+INSERT INTO `news` VALUES ('58', '33', '1', '哈哈哈', '在干嘛在干嘛中在干嘛', 'haha,hihi,hehe', '<p>夺在夺&nbsp;</p><p>dsfsdfsdsdfsd</p><p>hngf4324</p><p>fds</p>', '1', null, '哈哈', 'kdflsd', null, null, '1497334014', '1497334014', null, null, '0');
+INSERT INTO `news` VALUES ('59', '33', '1', '哈哈哈', '在干嘛在干嘛中在干嘛', 'haha,hihi,hehe', '<p>夺在夺&nbsp;</p><p>dsfsdfsdsdfsd</p><p>hngf4324</p><p>fds</p>', '1', null, '哈哈', 'kdflsd', null, null, '1497334028', '1497334028', null, null, '0');
+INSERT INTO `news` VALUES ('60', '38', '1', '试一下发布文章333', '娱乐文章描述，测试一下2222', '娱乐,明星,搞笑,11,22', '<p>娱乐文章内容2222</p><p><img src=\"/ueditor/php/upload/image/20170613/1497351158368567.jpg\" title=\"1497351158368567.jpg\" alt=\"headpic.jpg\"/></p><p>娱乐文章内容3333</p><p><img src=\"/ueditor/php/upload/image/20170613/1497351163545083.jpg\" title=\"1497351163545083.jpg\" alt=\"dingdong.jpg\" width=\"197\" height=\"200\"/></p><p>娱乐文章内容444</p>', '1', '69', '凤凰网2222', 'http://www.fenghuang222.com', null, null, '1497360670', '1497360670', null, null, '1');
 
 -- ----------------------------
 -- Table structure for `news_cate`
@@ -122,7 +131,7 @@ CREATE TABLE `news_cate` (
   `create_time` int(11) unsigned zerofill DEFAULT NULL,
   `update_time` int(11) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`cat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of news_cate
@@ -141,7 +150,10 @@ INSERT INTO `news_cate` VALUES ('39', '文化', '000000', '01496989345', '014969
 INSERT INTO `news_cate` VALUES ('40', '公益', '000000', '01496989357', '01496989357');
 INSERT INTO `news_cate` VALUES ('41', '科技', '000000', '01496989363', '01496989363');
 INSERT INTO `news_cate` VALUES ('42', '游戏', '000000', '01496989370', '01496989370');
-INSERT INTO `news_cate` VALUES ('43', '社会222', '000040', '01497000568', '01497000568');
+INSERT INTO `news_cate` VALUES ('43', '社会', '000031', '01497000568', '01497000568');
+INSERT INTO `news_cate` VALUES ('45', '测试222', '000035', '01497232290', '01497232290');
+INSERT INTO `news_cate` VALUES ('46', 'test', '000033', '01497247394', '01497247394');
+INSERT INTO `news_cate` VALUES ('47', 'test222', '000000', '01497247407', '01497247407');
 
 -- ----------------------------
 -- Table structure for `news_comment`
@@ -173,7 +185,7 @@ CREATE TABLE `news_image` (
   `img_title` varchar(100) DEFAULT NULL COMMENT '新闻图片标题',
   `img_thumbUrl` varchar(255) NOT NULL COMMENT '新闻图片缩略图地址',
   `img_commonUrl` varchar(255) NOT NULL COMMENT '新闻图片地址',
-  `img_originUrl` varchar(255) NOT NULL COMMENT '新闻图片原地址',
+  `img_originUrl` varchar(255) DEFAULT NULL COMMENT '新闻图片原地址',
   `img_thumbWidth` smallint(5) DEFAULT NULL COMMENT '图片缩略图宽度',
   `img_thumbHeight` smallint(5) DEFAULT NULL COMMENT '图片缩略图高度',
   `img_commonWidth` smallint(5) DEFAULT NULL COMMENT '图片通用宽度',
@@ -183,11 +195,17 @@ CREATE TABLE `news_image` (
   `create_time` int(11) unsigned zerofill DEFAULT NULL,
   `update_time` int(11) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`img_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of news_image
 -- ----------------------------
+INSERT INTO `news_image` VALUES ('65', null, '', '', 'upload/20170613/CR-pvMHXjAzVE.png', null, null, null, null, null, null, null, null);
+INSERT INTO `news_image` VALUES ('66', null, '', '', 'upload/20170613/CR-zFKK1J6g54.png', null, null, null, null, null, null, null, null);
+INSERT INTO `news_image` VALUES ('67', null, '', '', 'upload/20170613/CR-U4HOg0V8M1.png', null, null, null, null, null, null, null, null);
+INSERT INTO `news_image` VALUES ('68', null, '', '', 'upload/20170613/CR-Rp6XPJOo5G.png', null, null, null, null, null, null, '01497360601', '01497360601');
+INSERT INTO `news_image` VALUES ('69', null, '', '', 'upload/20170613/CR-uEvDgXNPIg.png', null, null, null, null, null, null, '01497360671', '01497360671');
+INSERT INTO `news_image` VALUES ('70', null, '', '', 'upload/20170613/CR-AcK4yKdEin.png', null, null, null, null, null, null, '01497360697', '01497360697');
 
 -- ----------------------------
 -- Table structure for `slide`
@@ -242,8 +260,9 @@ CREATE TABLE `user` (
   `user_frozen_money` decimal(10,2) DEFAULT NULL COMMENT '冻结金额',
   `user_validcode` tinyint(6) unsigned DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('8', '123456', 'kenny', null, 'ken@qq.com', null, '13925542760', '123456789', 'http://www.test.com/img/1.jpg', null, null, null, null, 'kenny', '1', '1.00', null, null, null, null, null, null, null, '0', null, null, null, null, null);
