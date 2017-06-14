@@ -38,7 +38,7 @@ class News extends Model{
     }
 
     public function comment(){
-        return $this->hasMany('NewsComments',"news_id","news_id")->field('comment_id,news_id,user_id,comment_content,comment_is_show,create_time,comment_good_count,comment_bad_count');
+        return $this->hasMany('NewsComment',"news_id","news_id")->field('comment_id,news_id,user_id,comment_content,comment_is_show,create_time,comment_good_count,comment_bad_count');
     }
 
 }

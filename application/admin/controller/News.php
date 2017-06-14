@@ -11,6 +11,11 @@ use think\Loader;
 
 class News extends Controller
 {
+    public function test()
+    {
+        dump(config('image_size')['middle_width']);
+    }
+
     public function index()
     {
         $name = "资讯管理";
@@ -99,9 +104,20 @@ class News extends Controller
 
         if ($data['news_img']) {
             $full_filename = saveBase64ImagePng($data['news_img'], 'upload/');
+
+            $full_filenames = explode('.', $full_filename);
+
+            $middle_filename = $full_filenames[0] . '_m.' . $full_filenames[1];
+            $small_filename = $full_filenames[0] . '_s.' . $full_filenames[1];
+
+            my_image_resize($full_filename, $middle_filename, config('image_size')['middle_width'], config('image_size')['middle_height']);
+            my_image_resize($full_filename, $small_filename, config('image_size')['thumb_width'], config('image_size')['thumb_height']);
+
             if (isset($full_filename)) {
                 Db::name('news_image')->insert([
                     'img_originUrl' => $full_filename,
+                    'img_commonUrl' => $middle_filename,
+                    'img_thumbUrl' => $small_filename,
                     'create_time'       =>  time(),
                     'update_time'       =>  time()
                 ]);
